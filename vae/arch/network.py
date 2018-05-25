@@ -44,7 +44,7 @@ class network:
 			sess.run(self.init)
 			print('[DEBUG] Saving TensorBoard summaries to: %s/logs' % self.flags.out_dir)
 			self.train_writer = tf.summary.FileWriter(os.path.join(self.flags.out_dir, 'logs'), sess.graph)
-
+			print('[DEBUG] Saving')
 			#Train vae
 			for epoch  in range(self.flags.max_epoch_vae):
 				epoch_loss = self.run_vae_epoch_train(epoch, sess)
@@ -68,6 +68,7 @@ class network:
 		delta_kl_weight = (1e-2*1.)/(self.flags.max_epoch_vae*1.) #CHANGED WEIGHT SCHEDULE
 		latent_feed = np.zeros((self.flags.batch_size, self.flags.hidden_size), dtype='f')
 		for i in range(self.flags.updates_per_epoch):
+			print('Epoch train runvaeepochtrain')
 			kl_weight = delta_kl_weight*(epoch)
 			batch, batch_recon_const, batch_lossweights, batch_recon_const_outres = \
 				self.data_loader.train_next_batch(self.flags.batch_size, self.nch)
