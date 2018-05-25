@@ -44,7 +44,6 @@ class network:
 			sess.run(self.init)
 			print('[DEBUG] Saving TensorBoard summaries to: %s/logs' % self.flags.out_dir)
 			self.train_writer = tf.summary.FileWriter(os.path.join(self.flags.out_dir, 'logs'), sess.graph)
-			print('[DEBUG] Saving')
 			#Train vae
 			for epoch  in range(self.flags.max_epoch_vae):
 				epoch_loss = self.run_vae_epoch_train(epoch, sess)

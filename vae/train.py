@@ -39,8 +39,8 @@ def main():
   if(len(sys.argv) == 1):
     raise NameError('[ERROR] No dataset key')
   elif(sys.argv[1] == 'lfw'):
-    FLAGS.updates_per_epoch = 380
-    FLAGS.log_interval = 120
+    FLAGS.updates_per_epoch = 38
+    FLAGS.log_interval = 12
     FLAGS.out_dir = 'data/output/lfw/'
     FLAGS.list_dir = 'data/imglist/lfw/'
     FLAGS.pc_dir = 'data/pcomp/lfw/'
