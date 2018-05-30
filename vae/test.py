@@ -19,7 +19,7 @@ flags.DEFINE_string("in_dir", "", "")
 flags.DEFINE_string("list_dir", "", "")
 
 #Dataset Params
-flags.DEFINE_integer("batch_size", 1, "batch size")
+flags.DEFINE_integer("batch_size", 2, "batch size")
 flags.DEFINE_integer("updates_per_epoch", 1, "number of updates per epoch")
 flags.DEFINE_integer("log_interval", 1, "input image height")
 flags.DEFINE_integer("img_width", 64, "input image width")
