@@ -61,7 +61,7 @@ def main():
     model_colorfield = vae(FLAGS, nch=2, condinference_flag=True)
     dnn = network(model_colorfield, data_loader, 2, FLAGS)
     dnn.run_divcolor(os.path.join(FLAGS.out_dir, 'models') , \
-      latent_vars_colorfield_test, num_batches=num_batches)
+      lv_mdn_test, num_batches=num_batches)
     if(FLAGS.is_run_cvae == True):
       dnn.run_cvae(os.path.join(FLAGS.out_dir, 'models') , \
        lv_mdn_test, num_batches=num_batches, num_repeat=8, num_cluster=5)
