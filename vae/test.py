@@ -19,7 +19,7 @@ flags.DEFINE_string("in_dir", "", "")
 flags.DEFINE_string("list_dir", "", "")
 
 #Dataset Params
-flags.DEFINE_integer("batch_size", 32, "batch size")
+flags.DEFINE_integer("batch_size", 8, "batch size")
 flags.DEFINE_integer("updates_per_epoch", 1, "number of updates per epoch")
 flags.DEFINE_integer("log_interval", 1, "input image height")
 flags.DEFINE_integer("img_width", 64, "input image width")
@@ -53,7 +53,7 @@ def main():
 
   #Diverse Colorization
   nmix = 8
-  num_batches = 31
+  num_batches = 2
   lv_mdn_test = np.load(os.path.join(FLAGS.out_dir, 'lv_color_mdn_test.mat.npy'))
    
   graph_divcolor = tf.Graph()
