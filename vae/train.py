@@ -51,7 +51,7 @@ def main():
     FLAGS.out_dir = 'data/output/places/'
     FLAGS.list_dir = 'data/imglist/places/'
     FLAGS.pc_dir = 'data/pcomp/places/'
-    print "Epoches: 3, updates: 190, logs:38"
+    print("Epoches: 3, updates: 190, logs:38")
   else:
     raise NameError('[ERROR] Incorrect dataset key')
 
