@@ -28,8 +28,8 @@ flags.DEFINE_integer("img_height", 64, "input image height")
 #Network Params
 flags.DEFINE_boolean("is_train", True, "Is training flag") 
 flags.DEFINE_integer("hidden_size", 64, "size of the hidden VAE unit")
-flags.DEFINE_float("lr_vae", 1e-6, "learning rate for vae")
-flags.DEFINE_integer("max_epoch_vae", 10, "max epoch")
+flags.DEFINE_float("lr_vae", 1e-5, "learning rate for vae")
+flags.DEFINE_integer("max_epoch_vae", 3, "max epoch")
 flags.DEFINE_integer("pc_comp", 20, "number of principle components")
 
 
@@ -46,11 +46,12 @@ def main():
     FLAGS.pc_dir = 'data/pcomp/lfw/'
   #add other datasets here
   elif(sys.argv[1] == 'places'):
-    FLAGS.updates_per_epoch = 38
-    FLAGS.log_interval = 12
+    FLAGS.updates_per_epoch = 190
+    FLAGS.log_interval = 38
     FLAGS.out_dir = 'data/output/places/'
     FLAGS.list_dir = 'data/imglist/places/'
     FLAGS.pc_dir = 'data/pcomp/places/'
+    print "Epoches: 3, updates: 190, logs:38"
   else:
     raise NameError('[ERROR] Incorrect dataset key')
 
