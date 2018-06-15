@@ -35,6 +35,9 @@ class network:
 		self.saver = tf.train.Saver(max_to_keep=0)
 		self.summary_op = tf.summary.merge_all()
 
+	# Train a VAE network
+	# - If train, train the network and save checkpoints along the way
+	# - If not, load checkpoint and run for latentvar_train and latentvar_test
 	def train_vae(self, chkptdir, is_train=True):
 		gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.95)
 		sess = tf.Session(config=tf.ConfigProto(gpu_options=gpu_options))
@@ -44,30 +47,32 @@ class network:
 			sess.run(self.init)
 			print('[DEBUG] Saving TensorBoard summaries to: %s/logs' % self.flags.out_dir)
 			self.train_writer = tf.summary.FileWriter(os.path.join(self.flags.out_dir, 'logs'), sess.graph)
-			#Train vae
+			
+			# Train vae on a number of Epoch
 			for epoch  in range(self.flags.max_epoch_vae):
 				epoch_loss = self.run_vae_epoch_train(epoch, sess)
 				epoch_loss = (epoch_loss*1.) / (self.flags.updates_per_epoch)
-				print('[DEBUG] ####### Train VAE Epoch#%d, Loss %f #######' % (epoch, epoch_loss))
+				print('[DEBUG] ####### Train VAE Epoch #%d, Loss %f #######' % (epoch, epoch_loss))
 				self.__save_chkpt(epoch, sess, chkptdir, prefix='model_vae')
 		else:
 			self.__load_chkpt(sess, chkptdir)
 
+		# Run model on latentvars_train and latentvars_test
 		epoch_latentvars_train = self.run_vae_epoch_test(self.flags.max_epoch_vae,\
-      sess, num_batches=num_train_batches, is_train=True)
-
+      sess, num_batches=3, is_train=True)
 		epoch_latentvars_test = self.run_vae_epoch_test(2, sess, num_batches=3, is_train=False)
 
 		sess.close()
 		return epoch_latentvars_train, epoch_latentvars_test 
 	
+	# For each Epoch, train on the epoch and return the calculated loss
 	def run_vae_epoch_train(self, epoch, sess):
 		epoch_loss = 0.
 		self.data_loader.random_reset()
 		delta_kl_weight = (1e-2*1.)/(self.flags.max_epoch_vae*1.) #CHANGED WEIGHT SCHEDULE
 		latent_feed = np.zeros((self.flags.batch_size, self.flags.hidden_size), dtype='f')
 		for i in range(self.flags.updates_per_epoch):
-			print('Epoch train runvaeepochtrain')
+			print('Epoch train update runvaeepochtrain')
 			kl_weight = delta_kl_weight*(epoch)
 			batch, batch_recon_const, batch_lossweights, batch_recon_const_outres = \
 				self.data_loader.train_next_batch(self.flags.batch_size, self.nch)

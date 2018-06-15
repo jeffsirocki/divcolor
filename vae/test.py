@@ -45,6 +45,13 @@ def main():
     FLAGS.out_dir = 'data/output/lfw/'
     FLAGS.list_dir = 'data/imglist/lfw/'
     FLAGS.pc_dir = 'data/pcomp/lfw/'
+  #add other datasets
+  elif(sys.argv[1] == 'places'):
+    FLAGS.updates_per_epoch = 38
+    FLAGS.log_interval = 12
+    FLAGS.out_dir = 'data/output/places/'
+    FLAGS.list_dir = 'data/imglist/places/'
+    FLAGS.pc_dir = 'data/pcomp/places/'
   else:
     raise NameError('[ERROR] Incorrect dataset key')
   data_loader = lab_imageloader(FLAGS.in_dir, \

@@ -72,17 +72,17 @@ class lab_imageloader:
     for i_n, i in enumerate(range(self.train_batch_head, self.train_batch_head+batch_size)):
       currid = self.train_shuff_ids[i]
       img_large = cv2.imread(self.train_img_fns[currid])
-
-      if(self.shape is not None):
+      
+      if(img_large is not None and self.shape is not None):
         img = cv2.resize(img_large, (self.shape[0], self.shape[1]))
         img_outres = cv2.resize(img_large, (self.outshape[0], self.outshape[1]))
 
-      img_lab = cv2.cvtColor(img, cv2.COLOR_BGR2LAB)
-      img_lab_outres = cv2.cvtColor(img_outres, cv2.COLOR_BGR2LAB)
-      batch_recon_const[i_n, ...] = ((img_lab[..., 0].reshape(-1)*1.)-128.)/128.
-      batch_recon_const_outres[i_n, ...] = ((img_lab_outres[..., 0].reshape(-1)*1.)-128.)/128.
-      batch[i_n, ...] = np.concatenate((((img_lab[..., 1].reshape(-1)*1.)-128.)/128.,
-        ((img_lab[..., 2].reshape(-1)*1.)-128.)/128.), axis=0)
+        img_lab = cv2.cvtColor(img, cv2.COLOR_BGR2LAB)
+        img_lab_outres = cv2.cvtColor(img_outres, cv2.COLOR_BGR2LAB)
+        batch_recon_const[i_n, ...] = ((img_lab[..., 0].reshape(-1)*1.)-128.)/128.
+        batch_recon_const_outres[i_n, ...] = ((img_lab_outres[..., 0].reshape(-1)*1.)-128.)/128.
+        batch[i_n, ...] = np.concatenate((((img_lab[..., 1].reshape(-1)*1.)-128.)/128.,
+          ((img_lab[..., 2].reshape(-1)*1.)-128.)/128.), axis=0)
 
       if(self.lossweights is not None):
         batch_lossweights[i_n, ...] = self.__get_lossweights(batch[i_n, ...])
