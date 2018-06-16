@@ -22,14 +22,14 @@ flags.DEFINE_string("list_dir", "", "")
 flags.DEFINE_integer("batch_size", 32, "batch size")
 flags.DEFINE_integer("updates_per_epoch", 1, "number of updates per epoch")
 flags.DEFINE_integer("log_interval", 1, "input image height")
-flags.DEFINE_integer("img_width", 64, "input image width")
-flags.DEFINE_integer("img_height", 64, "input image height")
+flags.DEFINE_integer("img_width", 256, "input image width")
+flags.DEFINE_integer("img_height", 256, "input image height")
 
 #Network Params
 flags.DEFINE_boolean("is_train", True, "Is training flag") 
-flags.DEFINE_integer("hidden_size", 64, "size of the hidden VAE unit")
-flags.DEFINE_float("lr_vae", 1e-5, "learning rate for vae")
-flags.DEFINE_integer("max_epoch_vae", 3, "max epoch")
+flags.DEFINE_integer("hidden_size", 256, "size of the hidden VAE unit")
+flags.DEFINE_float("lr_vae", 1e-6, "learning rate for vae")
+flags.DEFINE_integer("max_epoch_vae", 10, "max epoch")
 flags.DEFINE_integer("pc_comp", 20, "number of principle components")
 
 
@@ -46,12 +46,12 @@ def main():
     FLAGS.pc_dir = 'data/pcomp/lfw/'
   #add other datasets here
   elif(sys.argv[1] == 'places'):
-    FLAGS.updates_per_epoch = 190
-    FLAGS.log_interval = 38
+    FLAGS.updates_per_epoch = 380
+    FLAGS.log_interval = 120
     FLAGS.out_dir = 'data/output/places/'
     FLAGS.list_dir = 'data/imglist/places/'
     FLAGS.pc_dir = 'data/pcomp/places/'
-    print("Epoches: 3, updates: 190, logs:38")
+    print("Epoches: 3, updates: 380, logs:120")
   else:
     raise NameError('[ERROR] Incorrect dataset key')
 

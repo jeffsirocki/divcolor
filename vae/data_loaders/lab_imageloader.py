@@ -74,6 +74,7 @@ class lab_imageloader:
       img_large = cv2.imread(self.train_img_fns[currid])
       
       if(img_large is not None and self.shape is not None):
+        print(self.shape)
         img = cv2.resize(img_large, (self.shape[0], self.shape[1]))
         img_outres = cv2.resize(img_large, (self.outshape[0], self.outshape[1]))
 
