@@ -22,8 +22,8 @@ flags.DEFINE_string("list_dir", "", "")
 flags.DEFINE_integer("batch_size", 32, "batch size")
 flags.DEFINE_integer("updates_per_epoch", 1, "number of updates per epoch")
 flags.DEFINE_integer("log_interval", 1, "input image height")
-flags.DEFINE_integer("img_width", 256, "input image width")
-flags.DEFINE_integer("img_height", 256, "input image height")
+flags.DEFINE_integer("img_width", 64, "input image width")
+flags.DEFINE_integer("img_height", 64, "input image height")
 
 #Network Params
 flags.DEFINE_boolean("is_train", True, "Is training flag") 
