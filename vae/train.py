@@ -27,7 +27,7 @@ flags.DEFINE_integer("img_height", 256, "input image height")
 
 #Network Params
 flags.DEFINE_boolean("is_train", True, "Is training flag") 
-flags.DEFINE_integer("hidden_size", 256, "size of the hidden VAE unit")
+flags.DEFINE_integer("hidden_size", 64, "size of the hidden VAE unit")
 flags.DEFINE_float("lr_vae", 1e-6, "learning rate for vae")
 flags.DEFINE_integer("max_epoch_vae", 10, "max epoch")
 flags.DEFINE_integer("pc_comp", 20, "number of principle components")
