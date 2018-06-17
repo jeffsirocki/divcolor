@@ -185,7 +185,7 @@ class network:
 
 		sess.close()
 
-	def run_divcolor(self, chkptdir, latentvars, num_batches=3, topk=8):
+	def run_divcolor(self, chkptdir, latentvars, num_batches=3, topk=1):
 		gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.95)
 		sess = tf.Session(config=tf.ConfigProto(gpu_options=gpu_options))
 		self.__load_chkpt(sess, chkptdir)

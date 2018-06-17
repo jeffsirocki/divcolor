@@ -74,7 +74,7 @@ class lab_imageloader:
       img_large = cv2.imread(self.train_img_fns[currid])
       
       if(img_large is not None and self.shape is not None):
-        print(self.shape)
+        print(i)
         img = cv2.resize(img_large, (self.shape[0], self.shape[1]))
         img_outres = cv2.resize(img_large, (self.outshape[0], self.outshape[1]))
 
@@ -153,8 +153,10 @@ class lab_imageloader:
   def save_divcolor(self, net_op, gt, epoch, itr_id, prefix, batch_size, imgname, num_cols=8, net_recon_const=None):
     img_lab = np.zeros((self.outshape[0], self.outshape[1], 3), dtype='uint8')
     img_lab_mat = np.zeros((self.shape[0], self.shape[1], 2), dtype='uint8')
-    if not os.path.exists('%s/%s' % (self.out_directory, imgname)):
-      os.makedirs('%s/%s' % (self.out_directory, imgname))
+    if not os.path.exists('%s/validation' % (self.out_directory)):
+      os.makedirs('%s/validation' % (self.out_directory))
+    if not os.path.exists('%s/gt' % (self.out_directory)):
+      os.makedirs('%s/gt' % (self.out_directory))
     for i in range(batch_size):
       img_lab[..., 0] = self.__get_decoded_img(net_recon_const[i, ...].reshape(self.outshape[0], self.outshape[1]))
       img_lab[..., 1] = self.__get_decoded_img(net_op[i, :np.prod(self.shape)].reshape(self.shape[0], self.shape[1]))
@@ -162,7 +164,7 @@ class lab_imageloader:
       img_lab_mat[..., 0] = 128.*net_op[i, :np.prod(self.shape)].reshape(self.shape[0], self.shape[1])+128.
       img_lab_mat[..., 1] = 128.*net_op[i, np.prod(self.shape):].reshape(self.shape[0], self.shape[1])+128.
       img_rgb = cv2.cvtColor(img_lab, cv2.COLOR_LAB2BGR)
-      out_fn_pred = '%s/%s/%s_%03d.png' % (self.out_directory, imgname, prefix, i)
+      out_fn_pred = '%s/validation/%s_%03d.png' % (self.out_directory, imgname, i)
       cv2.imwrite(out_fn_pred, img_rgb)
 #      out_fn_mat = '%s/%s/%s_%03d.mat' % (self.out_directory, imgname, prefix, i)
 #      np.save(out_fn_mat, img_lab_mat)
@@ -171,7 +173,7 @@ class lab_imageloader:
     img_lab[..., 2] = self.__get_decoded_img(gt[0, np.prod(self.shape):].reshape(self.shape[0], self.shape[1]))
     img_lab_mat[..., 0] = 128.*gt[0, :np.prod(self.shape)].reshape(self.shape[0], self.shape[1])+128.
     img_lab_mat[..., 1] = 128.*gt[0, np.prod(self.shape):].reshape(self.shape[0], self.shape[1])+128.
-    out_fn_pred = '%s/%s/gt.png' % (self.out_directory, imgname)
+    out_fn_pred = '%s/gt/%s_gt.png' % (self.out_directory, imgname)
     img_rgb = cv2.cvtColor(img_lab, cv2.COLOR_LAB2BGR)
     cv2.imwrite(out_fn_pred, img_rgb)
 #    out_fn_mat = '%s/%s/gt.mat' % (self.out_directory, imgname)
