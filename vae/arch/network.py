@@ -185,7 +185,7 @@ class network:
 
 		sess.close()
 
-	def run_divcolor(self, chkptdir, latentvars, num_batches=3, topk=1):
+	def run_divcolor(self, chkptdir, latentvars, num_batches=3, topk=8):
 		gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.95)
 		sess = tf.Session(config=tf.ConfigProto(gpu_options=gpu_options))
 		self.__load_chkpt(sess, chkptdir)
@@ -224,7 +224,7 @@ class network:
 				_, output  = sess.run(\
 						[self.check_nan_op, self.op_vae_condinference], \
 						feed_dict)
-				
+				topk=1
 				self.data_loader.save_divcolor(output[:topk], batch_1[:topk], i, j, \
 					'divcolor', topk, batch_imgnames[j], num_cols=8, \
 					net_recon_const=batch_recon_const_outres_1[:topk, ...])
