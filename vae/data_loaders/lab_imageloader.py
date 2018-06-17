@@ -120,7 +120,7 @@ class lab_imageloader:
         ((img_lab[..., 2].reshape(-1)*1.)-128.)/128.), axis=0)
 
     self.test_batch_head = self.test_batch_head + batch_size
-  
+    print(self.test_batch_head)
     return batch, batch_recon_const, batch_recon_const_outres, batch_imgnames
   
   def save_output_with_gt(self, net_op, gt, epoch, itr_id, prefix, batch_size, num_cols=8, net_recon_const=None):
