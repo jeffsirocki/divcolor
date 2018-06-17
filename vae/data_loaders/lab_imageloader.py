@@ -164,7 +164,7 @@ class lab_imageloader:
       img_lab_mat[..., 0] = 128.*net_op[i, :np.prod(self.shape)].reshape(self.shape[0], self.shape[1])+128.
       img_lab_mat[..., 1] = 128.*net_op[i, np.prod(self.shape):].reshape(self.shape[0], self.shape[1])+128.
       img_rgb = cv2.cvtColor(img_lab, cv2.COLOR_LAB2BGR)
-      out_fn_pred = '%s/validation/%s_%03d.png' % (self.out_directory, imgname, i)
+      out_fn_pred = '%s/validation/%s.png' % (self.out_directory, imgname)
       cv2.imwrite(out_fn_pred, img_rgb)
 #      out_fn_mat = '%s/%s/%s_%03d.mat' % (self.out_directory, imgname, prefix, i)
 #      np.save(out_fn_mat, img_lab_mat)
