@@ -208,9 +208,9 @@ class network:
 				batch_1 = np.tile(batch[j, ...], (self.flags.batch_size, 1))	
 				batch_recon_const_1 = np.tile(batch_recon_const[j, ...], (self.flags.batch_size, 1))
 				batch_recon_const_outres_1 = np.tile(batch_recon_const_outres[j, ...], (self.flags.batch_size, 1))
-				curr_means = latentvars[imgid, :self.flags.hidden_size*nmix].reshape(nmix, self.flags.hidden_size)	
-				curr_sigma = latentvars[imgid, self.flags.hidden_size*nmix:(self.flags.hidden_size+1)*nmix].reshape(-1)	
-				curr_pi = latentvars[imgid, (self.flags.hidden_size+1)*nmix:].reshape(-1)	
+				curr_means = latentvars[imgid%1000, :self.flags.hidden_size*nmix].reshape(nmix, self.flags.hidden_size)	
+				curr_sigma = latentvars[imgid%1000, self.flags.hidden_size*nmix:(self.flags.hidden_size+1)*nmix].reshape(-1)	
+				curr_pi = latentvars[imgid%1000, (self.flags.hidden_size+1)*nmix:].reshape(-1)	
 				selectid = np.argsort(-1*curr_pi)	
 				latent_feed = np.tile(curr_means[selectid, ...], (np.int_(np.round((self.flags.batch_size*1.)/nmix)), 1))
 	
