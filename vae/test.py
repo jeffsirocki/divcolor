@@ -60,7 +60,7 @@ def main():
 
   #Diverse Colorization
   nmix = 8
-  num_batches = 31
+  num_batches = 10000
   lv_mdn_test = np.load(os.path.join(FLAGS.out_dir, 'lv_color_mdn_test.mat.npy'))
    
   graph_divcolor = tf.Graph()
