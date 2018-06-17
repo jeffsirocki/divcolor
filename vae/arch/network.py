@@ -199,7 +199,7 @@ class network:
 				self.nch*self.flags.img_height*self.flags.img_width), dtype='f')
 			output_all = np.zeros((0, \
 				self.nch*self.flags.img_height*self.flags.img_width), dtype='f')
-			if i<606:
+			if i<883:
 				print ('[DEBUG] Running batch %d (/%d)' % \
           (i, self.data_loader.test_img_num))
 				continue
