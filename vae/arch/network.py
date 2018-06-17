@@ -192,7 +192,7 @@ class network:
 		self.data_loader.reset()
 		kl_weight = 0.
 		nmix = topk
-		for i in range(31, num_batches):
+		for i in range(num_batches):
 			batch, batch_recon_const, batch_recon_const_outres, batch_imgnames = \
 				self.data_loader.test_next_batch(self.flags.batch_size, self.nch)
 			batch_lossweights = np.ones((self.flags.batch_size, \
